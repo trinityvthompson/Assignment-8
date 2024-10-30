@@ -2,23 +2,23 @@
 
 #  File: TestBinaryTree.py
 
-#  Description:
+#  Description: This Python code defines a binary search tree (BST) structure with methods to manipulate and analyze its nodes. 
 
-#  Student Name:
+#  Student Name: Trinity Thompson
 
-#  Student UT EID:
+#  Student UT EID: tyt242
 
-#  Partner Name:
+#  Partner Name: Marissa Shuchart
 
-#  Partner UT EID:
+#  Partner UT EID: ms87339
 
 #  Course Name: CS 313E
 
-#  Unique Number:
+#  Unique Number: 
 
-#  Date Created:
+#  Date Created: 10.29.24
 
-#  Date Last Modified:
+#  Date Last Modified: 10.29.24
 
 
 import sys
@@ -90,27 +90,84 @@ class Tree():
     # The range of values equals the maximum value in the binary search tree minus the minimum value.
     # If there is one value in the tree the range is 0. If the tree is empty the range is undefined.
     def range(self):
+        if self.root is None:
+            return None #undefined for an empty tree
+    
+        # Find minimum (leftmost node)
+        current = self.root
+        while current.lchild:
+            current = current.lchild
+        min_value = current.data
 
+        # Find maximum (rightmost node)
+        current = self.root
+        while current.rchild:
+            current = current.rchild
+        max_value = current.data
+
+        return max_value - min_value
 
     # Returns a list of nodes at a given level from left to right
     def get_level(self, level):
-   
+        nodes_at_level = []
+
+        def traverse(node, current_level):
+            if node is None:
+                return 
+            # If wer're at the target level, add this node's value
+            if current_level == level:
+                nodes_at_level.append(node.data)
+            # If we havent reaches the target level yet, keep going 
+            elif current_level < level:
+                # Visit left child first 
+                traverse(node.lchild, current_level + 1)
+                # Visit right child 
+                traverse(node.rchild, current_level + 1)
+        
+        # Start traversal from the root at level 0 
+        traverse(self.root, 0)
+        return nodes_at_level 
 
 
     # Returns the list of the node that you see from left side
     # The order of the output should be from top to down
     def left_side_view(self):
+        if self.root is None:
+            return []
+        
+        result = []
+        level = [self.root]
+
+        while level:
+            # Add the leftmost node of current level 
+            result.append(level[0].data)
+
+            # Prepare next level
+            next_level = []
+            for node in level:
+                if node.lchild:
+                    next_level.append(node.lchild)
+                if node.rchild:
+                    next_level.append(node.rchild)
+            level = next_level
+        
+        return result
 
 
     # returns the sum of the value of all leaves.
     # a leaf node does not have any children.
     def sum_leaf_nodes(self):
+        def sum_leaves(node):
+            if node is None:
+                return 0
+            # If this is a leaf node, return its value
+            if node.lchild is None and node.rchild is None:
+                return node.data
+            # Otherwise, sum up leaves in left and right subtrees
+            return sum_leaves(node.lchild) + sum_leaves(node.rchild)
+        
+        return sum_leaves(self.root)
   
-
-
-
-
-
 def make_tree(data):
     tree = Tree()
     for d in data:
