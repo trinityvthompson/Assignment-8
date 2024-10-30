@@ -2,7 +2,11 @@
 
 #  File: TestBinaryTree.py
 
-#  Description: This Python code defines a binary search tree (BST) structure with methods to manipulate and analyze its nodes. 
+#  Description:
+"""
+This Python code defines a binary search tree (BST) structure
+with methods to manipulate and analyze its nodes.
+"""
 
 #  Student Name: Trinity Thompson
 
@@ -14,7 +18,7 @@
 
 #  Course Name: CS 313E
 
-#  Unique Number: 
+#  Unique Number:
 
 #  Date Created: 10.29.24
 
@@ -33,7 +37,7 @@ class Node():
 
     def print_node(self, level=0):
 
-        if self.lchild != None:
+        if self.lchild is not None:
             self.lchild.print_node(level + 1)
 
         print(' ' * 3 * level + '->', self.data)
@@ -111,28 +115,28 @@ class Tree():
     def get_level(self, level):
         if self.root is None:
             return []
-        
+
         # List to store nodes at the target level
         nodes_at_level = []
 
         # Use a queue for level-order traversal
         current_level = 0
         queue = [(self.root, 0)]  # Each element is (node, level)
-    
+
         while queue:
             node, node_level = queue.pop(0)
-        
+
             # If we find a node at our target level, add its value
             if node_level == level:
                 nodes_at_level.append(Node.data)
-            
+
             # If we haven't exceeded our target level, add children to queue
             if node_level < level:
                 if node.lchild:
                     queue.append((node.lchild, node_level + 1))
                 if node.rchild:
                     queue.append((node.rchild, node_level + 1))
-                
+
         return nodes_at_level
 
 
@@ -141,12 +145,12 @@ class Tree():
     def left_side_view(self):
         if self.root is None:
             return []
-        
+
         result = []
         level = [self.root]
 
         while level:
-            # Add the leftmost node of current level 
+            # Add the leftmost node of current level
             result.append(level[0].data)
 
             # Prepare next level
@@ -157,9 +161,8 @@ class Tree():
                 if node.rchild:
                     next_level.append(node.rchild)
             level = next_level
-        
-        return result
 
+        return result
 
     # returns the sum of the value of all leaves.
     # a leaf node does not have any children.
@@ -172,9 +175,9 @@ class Tree():
                 return node.data
             # Otherwise, sum up leaves in left and right subtrees
             return sum_leaves(node.lchild) + sum_leaves(node.rchild)
-        
+
         return sum_leaves(self.root)
-  
+
 def make_tree(data):
     tree = Tree()
     for d in data:
