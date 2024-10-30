@@ -120,7 +120,6 @@ class Tree():
         nodes_at_level = []
 
         # Use a queue for level-order traversal
-        current_level = 0
         queue = [(self.root, 0)]  # Each element is (node, level)
 
         while queue:
