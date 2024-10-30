@@ -186,16 +186,25 @@ class Tree():
         """returns the sum of the value of all leaves.
         a leaf node does not have any children.
         """
-        def sum_leaves(node):
-            if node is None:
-                return 0
-            # If this is a leaf node, return its value
-            if node.lchild is None and node.rchild is None:
-                return node.data
-            # Otherwise, sum up leaves in left and right subtrees
-            return sum_leaves(node.lchild) + sum_leaves(node.rchild)
+        if self.root is None:
+            return 0
 
-        return sum_leaves(self.root)
+        stack = [self.root]
+        leaf_sum = 0
+
+        while stack:
+            node = stack.pop()
+
+            # Check if the node is a leaf
+            if node.lchild is None and node.rchild is None:
+                leaf_sum += node.data
+            # Push right and left children to the stack if they exist
+            if node.rchild:
+                stack.append(node.rchild)
+            if node.lchild:
+                stack.append(node.lchild)
+
+        return leaf_sum
 
 def make_tree(data):
     """Creates a tree instance"""
