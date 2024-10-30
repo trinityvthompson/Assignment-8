@@ -34,7 +34,11 @@ class Node():
         self.rchild = None
 
     def print_node(self, level=0):
-
+        """
+        This method performs a pre-order traversal of the binary tree, 
+        printing the current node's data and recursively printing its 
+        left and right children with indentation based on their level.
+        """
         if self.lchild is not None:
             self.lchild.print_node(level + 1)
 
@@ -44,6 +48,11 @@ class Node():
             self.rchild.print_node(level + 1)
 
     def get_height(self):
+        """
+        The height of a binary tree is defined as the number of edges 
+        on the longest path from the root node to a leaf node. If the 
+        tree is empty, the height is considered to be 0.
+        """
         if self.lchild is not None and self.rchild is not None:
             return 1 + max(self.lchild.get_height(), self.rchild.get_height())
         if self.lchild is not None:
@@ -56,12 +65,15 @@ class Node():
 class Tree():
     """constructor"""
     def __init__(self):
+        """Initializes root"""
         self.root = None
 
     def print(self, level):
+        """Prints node at that level"""
         self.root.print_node(level)
 
     def get_height(self):
+        """Gets height of tree"""
         return self.root.get_height()
 
     # Inserts data into Binary Search Tree and creates a valid BST
@@ -185,6 +197,7 @@ class Tree():
         return sum_leaves(self.root)
 
 def make_tree(data):
+    """Creates a tree instance"""
     tree = Tree()
     for d in data:
         tree.insert(d)
@@ -235,6 +248,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
