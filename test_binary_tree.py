@@ -1,12 +1,10 @@
 
-
+"""
 #  File: TestBinaryTree.py
 
 #  Description:
-"""
-This Python code defines a binary search tree (BST) structure
-with methods to manipulate and analyze its nodes.
-"""
+    This Python code defines a binary search tree (BST) structure
+    with methods to manipulate and analyze its nodes.
 
 #  Student Name: Trinity Thompson
 
@@ -18,18 +16,18 @@ with methods to manipulate and analyze its nodes.
 
 #  Course Name: CS 313E
 
-#  Unique Number:
+#  Unique Number: 50165
 
 #  Date Created: 10.29.24
 
 #  Date Last Modified: 10.29.24
-
+"""""
 
 import sys
 
 
 class Node():
-    # constructor
+    """constructor"""
     def __init__(self, data):
         self.data = data
         self.lchild = None
@@ -42,21 +40,21 @@ class Node():
 
         print(' ' * 3 * level + '->', self.data)
 
-        if self.rchild != None:
+        if self.rchild is not None:
             self.rchild.print_node(level + 1)
 
     def get_height(self):
         if self.lchild is not None and self.rchild is not None:
             return 1 + max(self.lchild.get_height(), self.rchild.get_height())
-        elif self.lchild is not None:
+        if self.lchild is not None:
             return 1 + self.lchild.get_height()
-        elif self.rchild is not None:
+        if self.rchild is not None:
             return 1 + self.rchild.get_height()
         return 1
 
 
 class Tree():
-    # constructor
+    """constructor"""
     def __init__(self):
         self.root = None
 
@@ -72,30 +70,34 @@ class Tree():
         if self.root is None:
             self.root = new_node
             return
-        else:
-            parent = self.root
-            curr = self.root
-            # finds location to insert new node
-            while curr is not None:
-                parent = curr
-                if data < curr.data:
-                    curr = curr.lchild
-                else:
-                    curr = curr.rchild
-            # inserts new node based on comparision to parent node
-            if data < parent.data:
-                parent.lchild = new_node
+        parent = self.root
+        curr = self.root
+        # finds location to insert new node
+        while curr is not None:
+            parent = curr
+            if data < curr.data:
+                curr = curr.lchild
             else:
-                parent.rchild = new_node
-            return
+                curr = curr.rchild
+        # inserts new node based on comparision to parent node
+        if data < parent.data:
+            parent.lchild = new_node
+        else:
+            parent.rchild = new_node
+        return
 
-    # Returns the range of values stored in a binary search tree of integers.
-    # The range of values equals the maximum value in the binary search tree minus the minimum value.
-    # If there is one value in the tree the range is 0. If the tree is empty the range is undefined.
+
     def range(self):
+        """
+        Returns the range of values stored in a binary search tree of integers.
+        The range of values equals the maximum value in the binary search 
+        tree minus the minimum value.
+        If there is one value in the tree the range is 0. If the tree is empty 
+        the range is undefined.
+        """
         if self.root is None:
             return None #undefined for an empty tree
-    
+
         # Find minimum (leftmost node)
         current = self.root
         while current.lchild:
@@ -111,8 +113,9 @@ class Tree():
         result = max_value - min_value
         return result
 
-    # Returns a list of nodes at a given level from left to right
+
     def get_level(self, level):
+        """Returns a list of nodes at a given level from left to right"""
         if self.root is None:
             return []
 
@@ -139,9 +142,11 @@ class Tree():
         return nodes_at_level
 
 
-    # Returns the list of the node that you see from left side
-    # The order of the output should be from top to down
     def left_side_view(self):
+        """
+        Returns the list of the node that you see from left side
+        The order of the output should be from top to down
+        """
         if self.root is None:
             return []
 
@@ -163,9 +168,11 @@ class Tree():
 
         return result
 
-    # returns the sum of the value of all leaves.
-    # a leaf node does not have any children.
+
     def sum_leaf_nodes(self):
+        """returns the sum of the value of all leaves.
+        a leaf node does not have any children.
+        """
         def sum_leaves(node):
             if node is None:
                 return 0
@@ -184,10 +191,10 @@ def make_tree(data):
     return tree
 
 # Develop your own main function or test cases to be able to develop.
-# Our tests on the Gradescop will import your classes and call the methods.
+# Our tests on the Gradescope will import your classes and call the methods.
 
 def main():
-    # Create three trees - two are the same and the third is different
+    """Create three trees - two are the same and the third is different"""
     line = sys.stdin.readline()
     line = line.strip()
     line = line.split()
