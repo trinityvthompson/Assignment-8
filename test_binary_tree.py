@@ -78,6 +78,7 @@ class Tree():
 
     # Inserts data into Binary Search Tree and creates a valid BST
     def insert(self, data):
+        """Insert a new node with the given data into the binary search tree."""
         new_node = Node(data)
         if self.root is None:
             self.root = new_node
