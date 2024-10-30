@@ -42,14 +42,13 @@ class Node():
             self.rchild.print_node(level + 1)
 
     def get_height(self):
-        if self.lchild != None and self.rchild != None:
+        if self.lchild is not None and self.rchild is not None:
             return 1 + max(self.lchild.get_height(), self.rchild.get_height())
-        elif self.lchild != None:
+        elif self.lchild is not None:
             return 1 + self.lchild.get_height()
-        elif self.rchild != None:
+        elif self.rchild is not None:
             return 1 + self.rchild.get_height()
-        else:
-            return 1
+        return 1
 
 
 class Tree():
@@ -66,14 +65,14 @@ class Tree():
     # Inserts data into Binary Search Tree and creates a valid BST
     def insert(self, data):
         new_node = Node(data)
-        if self.root == None:
+        if self.root is None:
             self.root = new_node
             return
         else:
             parent = self.root
             curr = self.root
             # finds location to insert new node
-            while curr != None:
+            while curr is not None:
                 parent = curr
                 if data < curr.data:
                     curr = curr.lchild
@@ -117,6 +116,7 @@ class Tree():
             # If wer're at the target level, add this node's value
             if current_level == level:
                 nodes_at_level.append(node.data)
+                return
             # If we havent reaches the target level yet, keep going 
             elif current_level < level:
                 # Visit left child first 
