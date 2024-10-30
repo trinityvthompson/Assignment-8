@@ -108,25 +108,31 @@ class Tree():
 
     # Returns a list of nodes at a given level from left to right
     def get_level(self, level):
+        if self.root is None:
+            return []
+        
+        # List to store nodes at the target level
         nodes_at_level = []
 
-        def traverse(node, current_level):
-            if node is None:
-                return 
-            # If wer're at the target level, add this node's value
-            if current_level == level:
-                nodes_at_level.append(node.data)
-                return
-            # If we havent reaches the target level yet, keep going 
-            elif current_level < level:
-                # Visit left child first 
-                traverse(node.lchild, current_level + 1)
-                # Visit right child 
-                traverse(node.rchild, current_level + 1)
+        # Use a queue for level-order traversal
+        current_level = 0
+        queue = [(self.root, 0)]  # Each element is (node, level)
+    
+        while queue:
+            node, node_level = queue.pop(0)
         
-        # Start traversal from the root at level 0 
-        traverse(self.root, 0)
-        return nodes_at_level 
+            # If we find a node at our target level, add its value
+            if node_level == level:
+                nodes_at_level.append(node.data)
+            
+            # If we haven't exceeded our target level, add children to queue
+            if node_level < level:
+                if node.lchild:
+                    queue.append((node.lchild, node_level + 1))
+                if node.rchild:
+                    queue.append((node.rchild, node_level + 1))
+                
+        return nodes_at_level
 
 
     # Returns the list of the node that you see from left side
