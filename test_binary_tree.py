@@ -104,7 +104,8 @@ class Tree():
             current = current.rchild
         max_value = current.data
 
-        return max_value - min_value
+        result = max_value - min_value
+        return result
 
     # Returns a list of nodes at a given level from left to right
     def get_level(self, level):
@@ -123,7 +124,7 @@ class Tree():
         
             # If we find a node at our target level, add its value
             if node_level == level:
-                nodes_at_level.append(node.data)
+                nodes_at_level.append(Node.data)
             
             # If we haven't exceeded our target level, add children to queue
             if node_level < level:
@@ -179,7 +180,6 @@ def make_tree(data):
     for d in data:
         tree.insert(d)
     return tree
-
 
 # Develop your own main function or test cases to be able to develop.
 # Our tests on the Gradescop will import your classes and call the methods.
